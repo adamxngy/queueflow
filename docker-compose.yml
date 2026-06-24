@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: queueflow_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: queueflow_db
+      POSTGRES_USER: queueflow_user
+      POSTGRES_PASSWORD: queueflow_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - queueflow_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  queueflow_postgres_data:

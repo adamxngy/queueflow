@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 
+from app.core.config import settings
+from app.db.database import check_database_connection
+
+
 app = FastAPI(
-    title="QueueFlow API",
+    title=settings.app_name,
     description="Digital queue management system for physical service businesses.",
     version="0.1.0",
 )
@@ -19,4 +23,13 @@ def read_root():
 def health_check():
     return {
         "status": "ok",
+    }
+
+
+@app.get("/health/db")
+def database_health_check():
+    check_database_connection()
+
+    return {
+        "database": "connected",
     }
