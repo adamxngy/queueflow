@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from app.core.config import settings
 from app.db.database import check_database_connection
+from app.routers import service_queues
 
 
 app = FastAPI(
@@ -9,6 +10,9 @@ app = FastAPI(
     description="Digital queue management system for physical service businesses.",
     version="0.1.0",
 )
+
+
+app.include_router(service_queues.router)
 
 
 @app.get("/")
