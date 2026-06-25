@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from app.core.config import settings
 from app.db.database import check_database_connection
-from app.routers import service_queues
+from app.routers import service_queues, tickets
 
 
 app = FastAPI(
@@ -13,7 +13,7 @@ app = FastAPI(
 
 
 app.include_router(service_queues.router)
-
+app.include_router(tickets.router)
 
 @app.get("/")
 def read_root():
